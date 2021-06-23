@@ -1,0 +1,7 @@
+C:\Users\BDT\source\repos\desktoptocc\bin\Debug\desktoptocc.exe.config
+C:\Users\BDT\source\repos\desktoptocc\bin\Debug\desktoptocc.exe
+C:\Users\BDT\source\repos\desktoptocc\bin\Debug\desktoptocc.pdb
+C:\Users\BDT\source\repos\desktoptocc\obj\Debug\desktoptocc.csprojAssemblyReference.cache
+C:\Users\BDT\source\repos\desktoptocc\obj\Debug\desktoptocc.csproj.CoreCompileInputs.cache
+C:\Users\BDT\source\repos\desktoptocc\obj\Debug\desktoptocc.exe
+C:\Users\BDT\source\repos\desktoptocc\obj\Debug\desktoptocc.pdb

@@ -1,0 +1,1520 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Colourful</name>
+    </assembly>
+    <members>
+        <member name="T:Colourful.HunterLabColor">
+            <summary>
+            Hunter Lab color
+            </summary>
+        </member>
+        <member name="F:Colourful.HunterLabColor.DefaultWhitePoint">
+            <summary>
+            C standard illuminant.
+            Used when reference white is not specified explicitly.
+            </summary>
+        </member>
+        <member name="M:Colourful.HunterLabColor.#ctor(System.Double,System.Double,System.Double)">
+            <param name="l">L (lightness) (from 0 to 100)</param>
+            <param name="a">a (usually from -100 to 100)</param>
+            <param name="b">b (usually from -100 to 100)</param>
+            <remarks>Uses <see cref="F:Colourful.HunterLabColor.DefaultWhitePoint"/> as white point.</remarks>
+        </member>
+        <member name="M:Colourful.HunterLabColor.#ctor(System.Double,System.Double,System.Double,Colourful.XYZColor)">
+            <param name="l">L (lightness) (from 0 to 100)</param>
+            <param name="a">a (usually from -100 to 100)</param>
+            <param name="b">b (usually from -100 to 100)</param>
+            <param name="whitePoint">Reference white (see <see cref="T:Colourful.Illuminants"/>)</param>
+        </member>
+        <member name="M:Colourful.HunterLabColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double})">
+            <param name="vector"><see cref="P:Colourful.HunterLabColor.Vector"/>, expected 3 dimensions</param>
+            <remarks>Uses <see cref="F:Colourful.HunterLabColor.DefaultWhitePoint"/> as white point.</remarks>
+        </member>
+        <member name="M:Colourful.HunterLabColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double},Colourful.XYZColor)">
+            <param name="vector"><see cref="P:Colourful.HunterLabColor.Vector"/>, expected 3 dimensions</param>
+            <param name="whitePoint">Reference white (see <see cref="T:Colourful.Illuminants"/>)</param>
+        </member>
+        <member name="P:Colourful.HunterLabColor.L">
+            <summary>
+            L (lightness)
+            </summary>
+            <remarks>
+            Ranges from 0 to 100.
+            </remarks>
+        </member>
+        <member name="P:Colourful.HunterLabColor.a">
+            <summary>
+            a
+            </summary>
+            <remarks>
+            Ranges usually from -100 to 100.
+            Negative values indicate green while positive values indicate magenta.
+            </remarks>
+        </member>
+        <member name="P:Colourful.HunterLabColor.b">
+            <summary>
+            b
+            </summary>
+            <remarks>
+            Ranges usually from -100 to 100.
+            Negative values indicate blue and positive values indicate yellow.
+            </remarks>
+        </member>
+        <member name="P:Colourful.HunterLabColor.WhitePoint">
+            <remarks><see cref="T:Colourful.Illuminants"/></remarks>
+        </member>
+        <member name="P:Colourful.HunterLabColor.Vector">
+            <summary>
+            <see cref="T:Colourful.IColorVector"/>
+            </summary>
+        </member>
+        <member name="T:Colourful.IColorVector">
+            <summary>
+            Color represented as a vector in its color space
+            </summary>
+        </member>
+        <member name="T:Colourful.Illuminants">
+            <summary>
+            Standard illuminants
+            </summary>
+            <remarks>
+            Coefficients taken from:
+            http://www.brucelindbloom.com/index.html?Eqn_ChromAdapt.html
+            <br />
+            Descriptions taken from:
+            http://en.wikipedia.org/wiki/Standard_illuminant
+            </remarks>
+        </member>
+        <member name="F:Colourful.Illuminants.A">
+            <summary>
+            Incandescent / Tungsten
+            </summary>
+        </member>
+        <member name="F:Colourful.Illuminants.B">
+            <summary>
+            Direct sunlight at noon (obsolete)
+            </summary>
+        </member>
+        <member name="F:Colourful.Illuminants.C">
+            <summary>
+            Average / North sky Daylight (obsolete)
+            </summary>
+        </member>
+        <member name="F:Colourful.Illuminants.D50">
+            <summary>
+            Horizon Light. ICC profile PCS
+            </summary>
+        </member>
+        <member name="F:Colourful.Illuminants.D55">
+            <summary>
+            Mid-morning / Mid-afternoon Daylight
+            </summary>
+        </member>
+        <member name="F:Colourful.Illuminants.D65">
+            <summary>
+            Noon Daylight: Television, sRGB color space
+            </summary>
+        </member>
+        <member name="F:Colourful.Illuminants.D75">
+            <summary>
+            North sky Daylight
+            </summary>
+        </member>
+        <member name="F:Colourful.Illuminants.E">
+            <summary>
+            Equal energy
+            </summary>
+        </member>
+        <member name="F:Colourful.Illuminants.F2">
+            <summary>
+            Cool White Fluorescent
+            </summary>
+        </member>
+        <member name="F:Colourful.Illuminants.F7">
+            <summary>
+            D65 simulator, Daylight simulator
+            </summary>
+        </member>
+        <member name="F:Colourful.Illuminants.F11">
+            <summary>
+            Philips TL84, Ultralume 40
+            </summary>
+        </member>
+        <member name="T:Colourful.IRGBWorkingSpace">
+            <summary>
+            RGB working color space
+            </summary> 
+        </member>
+        <member name="P:Colourful.IRGBWorkingSpace.WhitePoint">
+            <summary>
+            Reference white of the color space
+            </summary>
+        </member>
+        <member name="P:Colourful.IRGBWorkingSpace.ChromaticityCoordinates">
+            <summary>
+            Chromaticity coordinates of the primaries
+            </summary>
+        </member>
+        <member name="P:Colourful.IRGBWorkingSpace.Companding">
+            <summary>
+            The companding function associated with the RGB color system.
+            Used for conversion to XYZ and backwards.
+            See this for more information:
+            http://www.brucelindbloom.com/index.html?Eqn_RGB_to_XYZ.html
+            http://www.brucelindbloom.com/index.html?Eqn_XYZ_to_RGB.html
+            </summary>
+        </member>
+        <member name="T:Colourful.LabColor">
+            <summary>
+            CIE L*a*b* (1976) color
+            </summary>
+        </member>
+        <member name="F:Colourful.LabColor.DefaultWhitePoint">
+            <summary>
+            D50 standard illuminant.
+            Used when reference white is not specified explicitly.
+            </summary>
+        </member>
+        <member name="M:Colourful.LabColor.#ctor(System.Double,System.Double,System.Double)">
+            <param name="l">L* (lightness) (from 0 to 100)</param>
+            <param name="a">a* (usually from -100 to 100)</param>
+            <param name="b">b* (usually from -100 to 100)</param>
+            <remarks>Uses <see cref="F:Colourful.LabColor.DefaultWhitePoint"/> as white point.</remarks>
+        </member>
+        <member name="M:Colourful.LabColor.#ctor(System.Double,System.Double,System.Double,Colourful.XYZColor)">
+            <param name="l">L* (lightness) (from 0 to 100)</param>
+            <param name="a">a* (usually from -100 to 100)</param>
+            <param name="b">b* (usually from -100 to 100)</param>
+            <param name="whitePoint">Reference white (see <see cref="T:Colourful.Illuminants"/>)</param>
+        </member>
+        <member name="M:Colourful.LabColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double})">
+            <param name="vector"><see cref="P:Colourful.LabColor.Vector"/>, expected 3 dimensions</param>
+            <remarks>Uses <see cref="F:Colourful.LabColor.DefaultWhitePoint"/> as white point.</remarks>
+        </member>
+        <member name="M:Colourful.LabColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double},Colourful.XYZColor)">
+            <param name="vector"><see cref="P:Colourful.LabColor.Vector"/>, expected 3 dimensions</param>
+            <param name="whitePoint">Reference white (see <see cref="T:Colourful.Illuminants"/>)</param>
+        </member>
+        <member name="P:Colourful.LabColor.L">
+            <summary>
+            L* (lightness)
+            </summary>
+            <remarks>
+            Ranges from 0 to 100.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LabColor.a">
+            <summary>
+            a*
+            </summary>
+            <remarks>
+            Ranges usually from -100 to 100.
+            Negative values indicate green while positive values indicate magenta.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LabColor.b">
+            <summary>
+            b*
+            </summary>
+            <remarks>
+            Ranges usually from -100 to 100.
+            Negative values indicate blue and positive values indicate yellow.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LabColor.WhitePoint">
+            <remarks><see cref="T:Colourful.Illuminants"/></remarks>
+        </member>
+        <member name="P:Colourful.LabColor.Vector">
+            <summary>
+            <see cref="T:Colourful.IColorVector"/>
+            </summary>
+        </member>
+        <member name="T:Colourful.LChabColor">
+            <summary>
+            CIE L*C*h°, cylindrical form of <see cref="T:Colourful.LabColor">CIE L*a*b* (1976)</see>
+            </summary>
+        </member>
+        <member name="F:Colourful.LChabColor.DefaultWhitePoint">
+            <summary>
+            D50 standard illuminant.
+            Used when reference white is not specified explicitly.
+            </summary>
+        </member>
+        <member name="M:Colourful.LChabColor.#ctor(System.Double,System.Double,System.Double)">
+            <param name="l">L* (lightness) (from 0 to 100)</param>
+            <param name="c">C* (chroma) (from 0 to 100)</param>
+            <param name="h">h° (hue in degrees) (from 0 to 360)</param>
+        </member>
+        <member name="M:Colourful.LChabColor.#ctor(System.Double,System.Double,System.Double,Colourful.XYZColor)">
+            <param name="l">L* (lightness) (from 0 to 100)</param>
+            <param name="c">C* (chroma) (from 0 to 100)</param>
+            <param name="h">h° (hue in degrees) (from 0 to 360)</param>
+            <param name="whitePoint">Reference white (see <see cref="T:Colourful.Illuminants"/>)</param>
+        </member>
+        <member name="M:Colourful.LChabColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double})">
+            <param name="vector"><see cref="P:Colourful.LChabColor.Vector"/>, expected 3 dimensions</param>
+            <remarks>Uses <see cref="F:Colourful.LChabColor.DefaultWhitePoint"/> as white point.</remarks>
+        </member>
+        <member name="M:Colourful.LChabColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double},Colourful.XYZColor)">
+            <param name="vector"><see cref="P:Colourful.LChabColor.Vector"/>, expected 3 dimensions</param>
+            <param name="whitePoint">Reference white (see <see cref="T:Colourful.Illuminants"/>)</param>
+        </member>
+        <member name="P:Colourful.LChabColor.L">
+            <summary>
+            L* (lightness)
+            </summary>
+            <remarks>
+            Ranges from 0 to 100.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LChabColor.C">
+            <summary>
+            C* (chroma)
+            </summary>
+            <remarks>
+            Ranges usually from 0 to 100.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LChabColor.h">
+            <summary>
+            h° (hue in degrees)
+            </summary>
+            <remarks>
+            Ranges from 0 to 360.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LChabColor.WhitePoint">
+            <remarks><see cref="T:Colourful.Illuminants"/></remarks>
+        </member>
+        <member name="P:Colourful.LChabColor.Vector">
+            <summary>
+            <see cref="T:Colourful.IColorVector"/>
+            </summary>
+        </member>
+        <member name="P:Colourful.LChabColor.Saturation">
+            <summary>
+            Computes saturation of the color (chroma normalized by lightness)
+            </summary>
+            <remarks>
+            Ranges from 0 to 100.
+            </remarks>
+        </member>
+        <member name="T:Colourful.LChuvColor">
+            <summary>
+            CIE L*C*h°, cylindrical form of <see cref="T:Colourful.LuvColor">CIE L*u*v* (1976)</see>
+            </summary>
+        </member>
+        <member name="F:Colourful.LChuvColor.DefaultWhitePoint">
+            <summary>
+            D65 standard illuminant.
+            Used when reference white is not specified explicitly.
+            </summary>
+        </member>
+        <member name="M:Colourful.LChuvColor.#ctor(System.Double,System.Double,System.Double)">
+            <param name="l">L* (lightness) (from 0 to 100)</param>
+            <param name="c">C* (chroma) (from 0 to 100)</param>
+            <param name="h">h° (hue in degrees) (from 0 to 360)</param>
+        </member>
+        <member name="M:Colourful.LChuvColor.#ctor(System.Double,System.Double,System.Double,Colourful.XYZColor)">
+            <param name="l">L* (lightness) (from 0 to 100)</param>
+            <param name="c">C* (chroma) (from 0 to 100)</param>
+            <param name="h">h° (hue in degrees) (from 0 to 360)</param>
+            <param name="whitePoint">Reference white (see <see cref="T:Colourful.Illuminants"/>)</param>
+        </member>
+        <member name="M:Colourful.LChuvColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double})">
+            <param name="vector"><see cref="P:Colourful.LChuvColor.Vector"/>, expected 3 dimensions</param>
+            <remarks>Uses <see cref="F:Colourful.LChuvColor.DefaultWhitePoint"/> as white point.</remarks>
+        </member>
+        <member name="M:Colourful.LChuvColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double},Colourful.XYZColor)">
+            <param name="vector"><see cref="P:Colourful.LChuvColor.Vector"/>, expected 3 dimensions</param>
+            <param name="whitePoint">Reference white (see <see cref="T:Colourful.Illuminants"/>)</param>
+        </member>
+        <member name="P:Colourful.LChuvColor.L">
+            <summary>
+            L* (lightness)
+            </summary>
+            <remarks>
+            Ranges from 0 to 100.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LChuvColor.C">
+            <summary>
+            C* (chroma)
+            </summary>
+            <remarks>
+            Ranges usually from 0 to 100.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LChuvColor.h">
+            <summary>
+            h° (hue in degrees)
+            </summary>
+            <remarks>
+            Ranges from 0 to 360.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LChuvColor.WhitePoint">
+            <remarks><see cref="T:Colourful.Illuminants"/></remarks>
+        </member>
+        <member name="P:Colourful.LChuvColor.Vector">
+            <summary>
+            <see cref="T:Colourful.IColorVector"/>
+            </summary>
+        </member>
+        <member name="P:Colourful.LChuvColor.Saturation">
+            <summary>
+            Computes saturation of the color (chroma normalized by lightness)
+            </summary>
+            <remarks>
+            Ranges from 0 to 100.
+            </remarks>
+        </member>
+        <member name="M:Colourful.LChuvColor.FromSaturation(System.Double,System.Double,System.Double)">
+            <summary>
+            Constructs the color using saturation instead of chromas
+            </summary>
+        </member>
+        <member name="T:Colourful.LinearRGBColor">
+            <summary>
+            RGB color with specified <see cref="T:Colourful.IRGBWorkingSpace">working space</see>, which has linear channels (not companded)
+            </summary>
+        </member>
+        <member name="F:Colourful.LinearRGBColor.DefaultWorkingSpace">
+            <summary>
+            sRGB color space.
+            Used when working space is not specified explicitly.
+            </summary>
+        </member>
+        <member name="M:Colourful.LinearRGBColor.#ctor(System.Double,System.Double,System.Double)">
+            <param name="r">Red (from 0 to 1)</param>
+            <param name="g">Green (from 0 to 1)</param>
+            <param name="b">Blue (from 0 to 1)</param>
+            <remarks>Uses <see cref="F:Colourful.LinearRGBColor.DefaultWorkingSpace"/> as working space.</remarks>
+        </member>
+        <member name="M:Colourful.LinearRGBColor.#ctor(System.Double,System.Double,System.Double,Colourful.IRGBWorkingSpace)">
+            <param name="r">Red (from 0 to 1)</param>
+            <param name="g">Green (from 0 to 1)</param>
+            <param name="b">Blue (from 0 to 1)</param>
+            <param name="workingSpace"><see cref="T:Colourful.RGBWorkingSpaces"/></param>
+        </member>
+        <member name="M:Colourful.LinearRGBColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double})">
+            <param name="vector"><see cref="T:System.Collections.Generic.IReadOnlyList`1"/>, expected 3 dimensions (range from 0 to 1)</param>
+            <remarks>Uses <see cref="F:Colourful.LinearRGBColor.DefaultWorkingSpace"/> as working space.</remarks>
+        </member>
+        <member name="M:Colourful.LinearRGBColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double},Colourful.IRGBWorkingSpace)">
+            <param name="vector"><see cref="T:System.Collections.Generic.IReadOnlyList`1"/>, expected 3 dimensions (range from 0 to 1)</param>
+            <param name="workingSpace"><see cref="T:Colourful.RGBWorkingSpaces"/></param>
+        </member>
+        <member name="P:Colourful.LinearRGBColor.WorkingSpace">
+            <summary>
+            RGB color space
+            <seealso cref="T:Colourful.RGBWorkingSpaces"/>
+            </summary>
+        </member>
+        <member name="M:Colourful.LinearRGBColor.FromGrey(System.Double,Colourful.IRGBWorkingSpace)">
+            <summary>
+            Creates RGB color with all channels equal
+            </summary>
+            <param name="value">Grey value (from 0 to 1)</param>
+            <param name="workingSpace"><see cref="T:Colourful.RGBWorkingSpaces"/></param>
+        </member>
+        <member name="M:Colourful.LinearRGBColor.FromGrey(System.Double)">
+            <summary>
+            Creates RGB color with all channels equal
+            </summary>
+            <param name="value">Grey value (from 0 to 1)</param>
+            <remarks>Uses <see cref="F:Colourful.LinearRGBColor.DefaultWorkingSpace"/> as working space.</remarks>
+        </member>
+        <member name="T:Colourful.LMSColor">
+            <summary>
+            LMS color space represented by the response of the three types of cones of the human eye
+            </summary>
+        </member>
+        <member name="M:Colourful.LMSColor.#ctor(System.Double,System.Double,System.Double)">
+            <param name="l">L (usually from -1 to 1)</param>
+            <param name="m">M (usually from -1 to 1)</param>
+            <param name="s">S (usually from -1 to 1)</param>
+        </member>
+        <member name="M:Colourful.LMSColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double})">
+            <param name="vector"><see cref="P:Colourful.LMSColor.Vector"/>, expected 3 dimensions (usually from 0 to 1)</param>
+        </member>
+        <member name="P:Colourful.LMSColor.L">
+            <summary>
+            Long wavelengths (red) cone response (Rho)
+            </summary>
+            <remarks>
+            Ranges usually from -1 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LMSColor.M">
+            <summary>
+            Medium wavelengths (green) cone response (Gamma)
+            </summary>
+            <remarks>
+            Ranges usually from -1 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LMSColor.S">
+            <summary>
+            Short wavelengths (blue) cone response (Beta)
+            </summary>
+            <remarks>
+            Ranges usually from -1 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LMSColor.Vector">
+            <summary>
+            <see cref="T:Colourful.IColorVector"/>
+            </summary>
+        </member>
+        <member name="T:Colourful.LuvColor">
+            <summary>
+            CIE L*u*v* (1976) color
+            </summary>
+        </member>
+        <member name="F:Colourful.LuvColor.DefaultWhitePoint">
+            <summary>
+            D65 standard illuminant.
+            Used when reference white is not specified explicitly.
+            </summary>
+        </member>
+        <member name="M:Colourful.LuvColor.#ctor(System.Double,System.Double,System.Double)">
+            <param name="l">L* (lightness) (from 0 to 100)</param>
+            <param name="u">u* (usually from -100 to 100)</param>
+            <param name="v">v* (usually from -100 to 100)</param>
+            <remarks>Uses <see cref="F:Colourful.LuvColor.DefaultWhitePoint"/> as white point.</remarks>
+        </member>
+        <member name="M:Colourful.LuvColor.#ctor(System.Double,System.Double,System.Double,Colourful.XYZColor)">
+            <param name="l">L* (lightness) (from 0 to 100)</param>
+            <param name="u">u* (usually from -100 to 100)</param>
+            <param name="v">v* (usually from -100 to 100)</param>
+            <param name="whitePoint">Reference white (see <see cref="T:Colourful.Illuminants"/>)</param>
+        </member>
+        <member name="M:Colourful.LuvColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double})">
+            <param name="vector"><see cref="P:Colourful.LuvColor.Vector"/>, expected 3 dimensions</param>
+            <remarks>Uses <see cref="F:Colourful.LuvColor.DefaultWhitePoint"/> as white point.</remarks>
+        </member>
+        <member name="M:Colourful.LuvColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double},Colourful.XYZColor)">
+            <param name="vector"><see cref="P:Colourful.LuvColor.Vector"/>, expected 3 dimensions</param>
+            <param name="whitePoint">Reference white (see <see cref="T:Colourful.Illuminants"/>)</param>
+        </member>
+        <member name="P:Colourful.LuvColor.L">
+            <summary>
+            L* (lightness)
+            </summary>
+            <remarks>
+            Ranges from 0 to 100.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LuvColor.u">
+            <summary>
+            u*
+            </summary>
+            <remarks>
+            Ranges usually from -100 to 100.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LuvColor.v">
+            <summary>
+            v*
+            </summary>
+            <remarks>
+            Ranges usually from -100 to 100.
+            </remarks>
+        </member>
+        <member name="P:Colourful.LuvColor.WhitePoint">
+            <remarks><see cref="T:Colourful.Illuminants"/></remarks>
+        </member>
+        <member name="P:Colourful.LuvColor.Vector">
+            <summary>
+            <see cref="T:Colourful.IColorVector"/>
+            </summary>
+        </member>
+        <member name="T:Colourful.MacbethColorChecker">
+            <summary>
+            Colors of the Macbeth ColorChecker
+            </summary>
+            <remarks>
+            Values obtained from: http://xritephoto.com/documents/literature/en/ColorData-1p_EN.pdf
+            </remarks>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.DarkSkin">
+            <summary>
+            Dark skin (color #1)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.LightSkin">
+            <summary>
+            Light skin (color #2)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.BlueSky">
+            <summary>
+            Blue sky (color #3)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Foliage">
+            <summary>
+            Foliage (color #4)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.BlueFlower">
+            <summary>
+            Blue flower (color #5)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.BluishGreen">
+            <summary>
+            Bluish green (color #6)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Orange">
+            <summary>
+            Orange (color #7)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.PurplishBlue">
+            <summary>
+            Purplish blue (color #8)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.ModerateRed">
+            <summary>
+            Moderate red (color #9)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Purple">
+            <summary>
+            Purple (color #10)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.YellowGreen">
+            <summary>
+            Yellow green (color #11)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.OrangeYellow">
+            <summary>
+            Orange Yellow (color #12)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Blue">
+            <summary>
+            Blue (color #13)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Green">
+            <summary>
+            Green (color #14)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Red">
+            <summary>
+            Red (color #15)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Yellow">
+            <summary>
+            Yellow (color #16)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Magenta">
+            <summary>
+            Magenta (color #17)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Cyan">
+            <summary>
+            Cyan (color #18)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.White">
+            <summary>
+            White (color #19)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Neutral8">
+            <summary>
+            Neutral 8 (color #20)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Neutral6p5">
+            <summary>
+            Neutral 6.5 (color #21)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Neutral5">
+            <summary>
+            Neutral 5 (color #22)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Neutral3p5">
+            <summary>
+            Neutral 3.5 (color #23)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Black">
+            <summary>
+            Black (color #24)
+            </summary>
+        </member>
+        <member name="F:Colourful.MacbethColorChecker.Colors">
+            <summary>
+            Array of 24 colors of the Macbeth ColorChecker
+            </summary>
+        </member>
+        <member name="T:Colourful.RGBColor">
+            <summary>
+            RGB color with specified <see cref="T:Colourful.IRGBWorkingSpace">working space</see>
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBColor.DefaultWorkingSpace">
+            <summary>
+            sRGB color space.
+            Used when working space is not specified explicitly.
+            </summary>
+        </member>
+        <member name="M:Colourful.RGBColor.#ctor(System.Double,System.Double,System.Double)">
+            <param name="r">Red (from 0 to 1)</param>
+            <param name="g">Green (from 0 to 1)</param>
+            <param name="b">Blue (from 0 to 1)</param>
+            <remarks>Uses <see cref="F:Colourful.RGBColor.DefaultWorkingSpace"/> as working space.</remarks>
+        </member>
+        <member name="M:Colourful.RGBColor.#ctor(System.Double,System.Double,System.Double,Colourful.IRGBWorkingSpace)">
+            <param name="r">Red (from 0 to 1)</param>
+            <param name="g">Green (from 0 to 1)</param>
+            <param name="b">Blue (from 0 to 1)</param>
+            <param name="workingSpace"><see cref="T:Colourful.RGBWorkingSpaces"/></param>
+        </member>
+        <member name="M:Colourful.RGBColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double})">
+            <param name="vector"><see cref="T:System.Collections.Generic.IReadOnlyList`1"/>, expected 3 dimensions (range from 0 to 1)</param>
+            <remarks>Uses <see cref="F:Colourful.RGBColor.DefaultWorkingSpace"/> as working space.</remarks>
+        </member>
+        <member name="M:Colourful.RGBColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double},Colourful.IRGBWorkingSpace)">
+            <param name="vector"><see cref="T:System.Collections.Generic.IReadOnlyList`1"/>, expected 3 dimensions (range from 0 to 1)</param>
+            <param name="workingSpace"><see cref="T:Colourful.RGBWorkingSpaces"/></param>
+        </member>
+        <member name="M:Colourful.RGBColor.#ctor(System.Drawing.Color)">
+            <remarks>Uses <see cref="F:Colourful.RGBColor.DefaultWorkingSpace"/> as working space.</remarks>
+        </member>
+        <member name="M:Colourful.RGBColor.#ctor(System.Drawing.Color,Colourful.IRGBWorkingSpace)">
+            <param name="workingSpace"><see cref="T:Colourful.RGBWorkingSpaces"/></param>
+        </member>
+        <member name="P:Colourful.RGBColor.WorkingSpace">
+            <summary>
+            RGB color space
+            <seealso cref="T:Colourful.RGBWorkingSpaces"/>
+            </summary>
+        </member>
+        <member name="M:Colourful.RGBColor.FromGrey(System.Double,Colourful.IRGBWorkingSpace)">
+            <summary>
+            Creates RGB color with all channels equal
+            </summary>
+            <param name="value">Grey value (from 0 to 1)</param>
+            <param name="workingSpace"><see cref="T:Colourful.RGBWorkingSpaces"/></param>
+        </member>
+        <member name="M:Colourful.RGBColor.FromGrey(System.Double)">
+            <summary>
+            Creates RGB color with all channels equal
+            </summary>
+            <param name="value">Grey value (from 0 to 1)</param>
+            <remarks>Uses <see cref="F:Colourful.RGBColor.DefaultWorkingSpace"/> as working space.</remarks>
+        </member>
+        <member name="M:Colourful.RGBColor.FromRGB8bit(System.Byte,System.Byte,System.Byte,Colourful.IRGBWorkingSpace)">
+            <summary>
+            Creates RGB color from 8-bit channels
+            </summary>
+            <param name="workingSpace"><see cref="T:Colourful.RGBWorkingSpaces"/></param>
+        </member>
+        <member name="M:Colourful.RGBColor.FromRGB8bit(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Creates RGB color from 8-bit channels
+            </summary>
+            <remarks>Uses <see cref="F:Colourful.RGBColor.DefaultWorkingSpace"/> as working space.</remarks>
+        </member>
+        <member name="T:Colourful.RGBColorBase">
+            <summary>
+            RGB color without specified <see cref="T:Colourful.IRGBWorkingSpace">working space</see>
+            </summary>
+        </member>
+        <member name="M:Colourful.RGBColorBase.#ctor(System.Double,System.Double,System.Double)">
+            <param name="r">Red (from 0 to 1)</param>
+            <param name="g">Green (from 0 to 1)</param>
+            <param name="b">Blue (from 0 to 1)</param>
+        </member>
+        <member name="M:Colourful.RGBColorBase.#ctor(System.Collections.Generic.IReadOnlyList{System.Double})">
+            <param name="vector"><see cref="P:Colourful.RGBColorBase.Vector"/>, expected 3 dimensions (range from 0 to 1)</param>
+        </member>
+        <member name="P:Colourful.RGBColorBase.R">
+            <summary>
+            Red
+            </summary>
+            <remarks>
+            Ranges from 0 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.RGBColorBase.G">
+            <summary>
+            Green
+            </summary>
+            <remarks>
+            Ranges from 0 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.RGBColorBase.B">
+            <summary>
+            Blue
+            </summary>
+            <remarks>
+            Ranges from 0 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.RGBColorBase.Vector">
+            <summary>
+            <see cref="T:Colourful.IColorVector"/>
+            </summary>
+        </member>
+        <member name="T:Colourful.RGBWorkingSpaces">
+            <remarks>
+            Chromaticity coordinates taken from:
+            http://www.brucelindbloom.com/index.html?WorkingSpaceInfo.html
+            </remarks>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.sRGB">
+            <summary>
+            sRGB
+            </summary>
+            <remarks>
+            Uses proper companding function, according to:
+            http://www.brucelindbloom.com/index.html?Eqn_RGB_to_XYZ.html
+            </remarks>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.sRGBSimplified">
+            <summary>
+            Simplified sRGB (uses <see cref="T:Colourful.Implementation.RGB.GammaCompanding">gamma companding</see> instead of <see cref="T:Colourful.Implementation.RGB.sRGBCompanding"/>).
+            See also <see cref="F:Colourful.RGBWorkingSpaces.sRGB"/>.
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.Rec709">
+            <summary>
+            Rec. 709 (ITU-R Recommendation BT.709)
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.Rec2020">
+            <summary>
+            Rec. 2020 (ITU-R Recommendation BT.2020)
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.ECIRGBv2">
+            <summary>
+            ECI RGB v2
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.AdobeRGB1998">
+            <summary>
+            Adobe RGB (1998)
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.ApplesRGB">
+            <summary>
+            Apple sRGB
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.BestRGB">
+            <summary>
+            Best RGB
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.BetaRGB">
+            <summary>
+            Beta RGB
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.BruceRGB">
+            <summary>
+            Bruce RGB
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.CIERGB">
+            <summary>
+            CIE RGB
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.ColorMatchRGB">
+            <summary>
+            ColorMatch RGB
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.DonRGB4">
+            <summary>
+            Don RGB 4
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.EktaSpacePS5">
+            <summary>
+            Ekta Space PS5
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.NTSCRGB">
+            <summary>
+            NTSC RGB
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.PALSECAMRGB">
+            <summary>
+            PAL/SECAM RGB
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.ProPhotoRGB">
+            <summary>
+            ProPhoto RGB
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.SMPTECRGB">
+            <summary>
+            SMPTE-C RGB
+            </summary>
+        </member>
+        <member name="F:Colourful.RGBWorkingSpaces.WideGamutRGB">
+            <summary>
+            Wide Gamut RGB
+            </summary>
+        </member>
+        <member name="T:Colourful.xyChromaticityCoordinates">
+            <summary>
+            Coordinates of CIE xy chromaticity space
+            </summary>
+        </member>
+        <member name="M:Colourful.xyChromaticityCoordinates.#ctor(System.Double,System.Double)">
+            <param name="x">Chromaticity coordinate x (usually from 0 to 1)</param>
+            <param name="y">Chromaticity coordinate y (usually from 0 to 1)</param>
+        </member>
+        <member name="P:Colourful.xyChromaticityCoordinates.x">
+            <summary>
+            Chromaticity coordinate x
+            </summary>
+            <remarks>
+            Ranges usually from 0 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.xyChromaticityCoordinates.y">
+            <summary>
+            Chromaticity coordinate y
+            </summary>
+            <remarks>
+            Ranges usually from 0 to 1.
+            </remarks>
+        </member>
+        <member name="T:Colourful.xyYColor">
+            <summary>
+            CIE xyY color space (derived from <see cref="T:Colourful.XYZColor"/> color space)
+            </summary>
+        </member>
+        <member name="M:Colourful.xyYColor.#ctor(System.Double,System.Double,System.Double)">
+            <param name="x">x (usually from 0 to 1) chromaticity coordinate</param>
+            <param name="y">y (usually from 0 to 1) chromaticity coordinate</param>
+            <param name="Y">Y (usually from 0 to 1)</param>
+        </member>
+        <member name="M:Colourful.xyYColor.#ctor(Colourful.xyChromaticityCoordinates,System.Double)">
+            <param name="chromaticity">Chromaticity coordinates (x and y together)</param>
+            <param name="Y">Y (usually from 0 to 1)</param>
+        </member>
+        <member name="M:Colourful.xyYColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double})">
+            <param name="vector"><see cref="P:Colourful.xyYColor.Vector"/>, expected 3 dimensions (usually from 0 to 1)</param>
+        </member>
+        <member name="P:Colourful.xyYColor.x">
+            <remarks>
+            Ranges usually from 0 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.xyYColor.y">
+            <remarks>
+            Ranges usually from 0 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.xyYColor.Luminance">
+            <summary>
+            Y channel (luminance)
+            </summary>
+            <remarks>
+            Ranges usually from 0 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.xyYColor.Chromaticity">
+            <remarks>
+            Chromaticity coordinates (identical to x and y)
+            </remarks>
+        </member>
+        <member name="P:Colourful.xyYColor.Vector">
+            <summary>
+            <see cref="T:Colourful.IColorVector"/>
+            </summary>
+        </member>
+        <member name="T:Colourful.XYZColor">
+            <summary>
+            CIE 1931 XYZ color space
+            </summary>
+        </member>
+        <member name="M:Colourful.XYZColor.#ctor(System.Double,System.Double,System.Double)">
+            <param name="x">X (usually from 0 to 1)</param>
+            <param name="y">Y (usually from 0 to 1)</param>
+            <param name="z">Z (usually from 0 to 1)</param>
+        </member>
+        <member name="M:Colourful.XYZColor.#ctor(System.Collections.Generic.IReadOnlyList{System.Double})">
+            <param name="vector"><see cref="P:Colourful.XYZColor.Vector"/>, expected 3 dimensions (usually from 0 to 1)</param>
+        </member>
+        <member name="P:Colourful.XYZColor.X">
+            <remarks>
+            Ranges usually from 0 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.XYZColor.Y">
+            <remarks>
+            Ranges usually from 0 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.XYZColor.Z">
+            <remarks>
+            Ranges usually from 0 to 1.
+            </remarks>
+        </member>
+        <member name="P:Colourful.XYZColor.Vector">
+            <summary>
+            <see cref="T:Colourful.IColorVector"/>
+            </summary>
+        </member>
+        <member name="T:Colourful.Conversion.ColourfulConverter">
+            <summary>
+            Converts between color spaces and makes sure that the color is adapted using chromatic adaptation.
+            </summary>
+        </member>
+        <member name="M:Colourful.Conversion.ColourfulConverter.Adapt(Colourful.XYZColor,Colourful.XYZColor)">
+            <summary>
+            Performs chromatic adaptation of given XYZ color.
+            Target white point is <see cref="P:Colourful.Conversion.ColourfulConverter.WhitePoint"/>.
+            </summary>
+        </member>
+        <member name="M:Colourful.Conversion.ColourfulConverter.Adapt(Colourful.LinearRGBColor)">
+            <summary>
+            Adapts linear RGB color from the source working space to working space set in <see cref="P:Colourful.Conversion.ColourfulConverter.TargetRGBWorkingSpace"/>.
+            </summary>
+        </member>
+        <member name="M:Colourful.Conversion.ColourfulConverter.Adapt(Colourful.RGBColor)">
+            <summary>
+            Adapts RGB color from the source working space to working space set in <see cref="P:Colourful.Conversion.ColourfulConverter.TargetRGBWorkingSpace"/>.
+            </summary>
+        </member>
+        <member name="M:Colourful.Conversion.ColourfulConverter.Adapt(Colourful.LabColor)">
+            <summary>
+            Adapts Lab color from the source white point to white point set in <see cref="P:Colourful.Conversion.ColourfulConverter.TargetLabWhitePoint"/>.
+            </summary>
+        </member>
+        <member name="M:Colourful.Conversion.ColourfulConverter.Adapt(Colourful.LChabColor)">
+            <summary>
+            Adapts LChab color from the source white point to white point set in <see cref="P:Colourful.Conversion.ColourfulConverter.TargetLabWhitePoint"/>.
+            </summary>
+        </member>
+        <member name="M:Colourful.Conversion.ColourfulConverter.Adapt(Colourful.HunterLabColor)">
+            <summary>
+            Adapts Lab color from the source white point to white point set in <see cref="P:Colourful.Conversion.ColourfulConverter.TargetHunterLabWhitePoint"/>.
+            </summary>
+        </member>
+        <member name="M:Colourful.Conversion.ColourfulConverter.Adapt(Colourful.LuvColor)">
+            <summary>
+            Adapts Luv color from the source white point to white point set in <see cref="P:Colourful.Conversion.ColourfulConverter.TargetLuvWhitePoint"/>.
+            </summary>
+        </member>
+        <member name="P:Colourful.Conversion.ColourfulConverter.ChromaticAdaptation">
+            <summary>
+            Chromatic adaptation method used. When null, no adaptation will be performed.
+            </summary>
+        </member>
+        <member name="P:Colourful.Conversion.ColourfulConverter.LMSTransformationMatrix">
+            <summary>
+            Transformation matrix used in conversion to <see cref="T:Colourful.LMSColor"/>, also used in the default Von Kries Chromatic Adaptation method.
+            </summary>
+        </member>
+        <member name="P:Colourful.Conversion.ColourfulConverter.WhitePoint">
+            <summary>
+            White point used for chromatic adaptation in conversions from/to XYZ color space.
+            When null, no adaptation will be performed.
+            <seealso cref="P:Colourful.Conversion.ColourfulConverter.TargetLabWhitePoint"/>
+            </summary>
+        </member>
+        <member name="P:Colourful.Conversion.ColourfulConverter.TargetLabWhitePoint">
+            <summary>
+            White point used *when creating* Lab/LChab colors. (Lab/LChab colors on the input already contain the white point information)
+            Defaults to: <see cref="F:Colourful.LabColor.DefaultWhitePoint"/>.
+            </summary>
+        </member>
+        <member name="P:Colourful.Conversion.ColourfulConverter.TargetLuvWhitePoint">
+            <summary>
+            White point used *when creating* Luv/LChuv colors. (Luv/LChuv colors on the input already contain the white point information)
+            Defaults to: <see cref="F:Colourful.LuvColor.DefaultWhitePoint"/>.
+            </summary>
+        </member>
+        <member name="P:Colourful.Conversion.ColourfulConverter.TargetHunterLabWhitePoint">
+            <summary>
+            White point used *when creating* HunterLab colors. (HunterLab colors on the input already contain the white point information)
+            Defaults to: <see cref="F:Colourful.HunterLabColor.DefaultWhitePoint"/>.
+            </summary>
+        </member>
+        <member name="P:Colourful.Conversion.ColourfulConverter.TargetRGBWorkingSpace">
+            <summary>
+            Working space used *when creating* RGB colors. (RGB colors on the input already contain the working space information)
+            Defaults to: <see cref="F:Colourful.RGBColor.DefaultWorkingSpace"/>.
+            </summary>
+        </member>
+        <member name="T:Colourful.Conversion.IChromaticAdaptation">
+            <summary>
+            Chromatic adaptation.
+            A linear transformation of a source color (XS, YS, ZS) into a destination color (XD, YD, ZD) by a linear transformation [M]
+            which is dependent on the source reference white (XWS, YWS, ZWS) and the destination reference white (XWD, YWD, ZWD).
+            </summary>
+        </member>
+        <member name="M:Colourful.Conversion.IChromaticAdaptation.Transform(Colourful.XYZColor,Colourful.XYZColor,Colourful.XYZColor)">
+            <remarks>Doesn't crop the resulting color space coordinates (e. g. allows negative values for XYZ coordinates).</remarks>
+        </member>
+        <member name="T:Colourful.Conversion.VonKriesChromaticAdaptation">
+            <summary>
+            Basic implementation of the von Kries chromatic adaptation model
+            </summary>
+            <remarks>
+            Transformation described here:
+            http://www.brucelindbloom.com/index.html?Eqn_ChromAdapt.html
+            </remarks>
+        </member>
+        <member name="M:Colourful.Conversion.VonKriesChromaticAdaptation.#ctor(System.Collections.Generic.IReadOnlyList{System.Collections.Generic.IReadOnlyList{System.Double}})">
+            <summary>
+            Transformation matrix used for the conversion (definition of the cone response domain).
+            <see cref="T:Colourful.Implementation.Conversion.LMSTransformationMatrix"/>
+            </summary>
+        </member>
+        <member name="M:Colourful.Conversion.VonKriesChromaticAdaptation.Transform(Colourful.XYZColor,Colourful.XYZColor,Colourful.XYZColor)">
+            <summary>
+            Transforms XYZ color to destination reference white.
+            </summary>
+        </member>
+        <member name="T:Colourful.Difference.CIE76ColorDifference">
+            <summary>
+            CIE Delta-E 1976 formula
+            </summary>
+        </member>
+        <member name="M:Colourful.Difference.CIE76ColorDifference.ComputeDifference(Colourful.LabColor,Colourful.LabColor)">
+            <param name="x">Reference color</param>
+            <param name="y">Sample color</param>
+            <returns>Delta-E (1976) color difference</returns>
+        </member>
+        <member name="T:Colourful.Difference.CIE94ColorDifference">
+            <summary>
+            CIE Delta-E 1994 formula
+            </summary>
+            <remarks>
+            Implementation notes:
+            http://www.brucelindbloom.com/Eqn_DeltaE_CIE94.html
+            </remarks>
+        </member>
+        <member name="M:Colourful.Difference.CIE94ColorDifference.#ctor">
+            <summary>
+            Construct using weighing factors for <see cref="F:Colourful.Difference.CIE94ColorDifferenceApplication.GraphicArts"/>.
+            </summary>
+        </member>
+        <member name="M:Colourful.Difference.CIE94ColorDifference.#ctor(Colourful.Difference.CIE94ColorDifferenceApplication)">
+            <summary>
+            Construct using weighing factors for given application of color difference
+            </summary>
+            <param name="application"></param>
+        </member>
+        <member name="M:Colourful.Difference.CIE94ColorDifference.ComputeDifference(Colourful.LabColor,Colourful.LabColor)">
+            <param name="x">Reference color</param>
+            <param name="y">Sample color</param>
+            <returns>Delta-E (1994) color difference</returns>
+        </member>
+        <member name="T:Colourful.Difference.CIEDE2000ColorDifference">
+            <summary>
+            CIE Delta-E 2000 formula
+            </summary>
+        </member>
+        <member name="M:Colourful.Difference.CIEDE2000ColorDifference.ComputeDifference(Colourful.LabColor,Colourful.LabColor)">
+            <param name="x">Reference color</param>
+            <param name="y">Sample color</param>
+            <remarks>Implemented according to: Sharma, Gaurav; Wencheng Wu, Edul N. Dalal (2005). "The CIEDE2000 color-difference formula: Implementation notes, supplementary test data, and mathematical observations" (http://www.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf)</remarks>
+            <returns>Delta-E (2000) color difference</returns>
+        </member>
+        <member name="M:Colourful.Difference.CIEDE2000ColorDifference.SinDeg(System.Double)">
+            <summary>
+            Compute sine of angle in degrees
+            </summary>
+            <param name="x">Given angle</param>
+            <returns></returns>
+        </member>
+        <member name="M:Colourful.Difference.CIEDE2000ColorDifference.CosDeg(System.Double)">
+            <summary>
+            Compute cosine of angle in degrees
+            </summary>
+            <param name="x">Given angle</param>
+            <returns></returns>
+        </member>
+        <member name="T:Colourful.Difference.CMCColorDifference">
+            <summary>
+            CMC l:c (1984) color difference
+            </summary>
+            <remarks>
+            Equations: http://www.brucelindbloom.com/index.html?Eqn_DeltaE_CMC.html
+            </remarks>
+        </member>
+        <member name="F:Colourful.Difference.CMCColorDifference._c">
+            <summary>
+            Chroma
+            </summary>
+        </member>
+        <member name="F:Colourful.Difference.CMCColorDifference._l">
+            <summary>
+            Lightness
+            </summary>
+        </member>
+        <member name="M:Colourful.Difference.CMCColorDifference.CosDeg(System.Double)">
+            <summary>
+            Compute cosine of angle in degrees
+            </summary>
+            <param name="x">Given angle</param>
+            <returns></returns>
+        </member>
+        <member name="F:Colourful.Difference.CMCColorDifferenceThreshold.Acceptability">
+            <summary>
+            2:1 (l:c)
+            </summary>
+        </member>
+        <member name="F:Colourful.Difference.CMCColorDifferenceThreshold.Imperceptibility">
+            <summary>
+            1:1 (l:c)
+            </summary>
+        </member>
+        <member name="T:Colourful.Difference.IColorDifference`1">
+            <summary>
+            Computes distance between two vectors in color space
+            </summary>
+            <typeparam name="TColor"></typeparam>
+        </member>
+        <member name="M:Colourful.Difference.IColorDifference`1.ComputeDifference(`0,`0)">
+            <summary>
+            Computes distance between color x and y.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.IColorConversion`2">
+            <summary>
+            Converts color between two color spaces.
+            </summary>
+            <typeparam name="TInput"></typeparam>
+            <typeparam name="TOutput"></typeparam>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.HunterLabToXYZConverter">
+            <summary>
+            Converts from <see cref="T:Colourful.HunterLabColor"/> to <see cref="T:Colourful.XYZColor"/>.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.XYZToHunterLabConverter">
+            <summary>
+            Converts from <see cref="T:Colourful.HunterLabColor"/> to <see cref="T:Colourful.XYZColor"/>.
+            </summary>
+        </member>
+        <member name="P:Colourful.Implementation.Conversion.XYZToHunterLabConverter.HunterLabWhitePoint">
+            <summary>
+            Target reference white. When not set, <see cref="F:Colourful.LabColor.DefaultWhitePoint"/> is used.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.LabToXYZConverter">
+            <summary>
+            Converts from <see cref="T:Colourful.LabColor"/> to <see cref="T:Colourful.XYZColor"/>.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.XYZToLabConverter">
+            <summary>
+            Converts from <see cref="T:Colourful.XYZColor"/> to <see cref="T:Colourful.LabColor"/>.
+            </summary>
+        </member>
+        <member name="P:Colourful.Implementation.Conversion.XYZToLabConverter.LabWhitePoint">
+            <summary>
+            Target reference white. When not set, <see cref="F:Colourful.LabColor.DefaultWhitePoint"/> is used.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.LabToLChabConverter">
+            <summary>
+            Converts from <see cref="T:Colourful.LabColor"/> to <see cref="T:Colourful.LChabColor"/>.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.LChabToLabConverter">
+            <summary>
+            Converts from <see cref="T:Colourful.LChabColor"/> to <see cref="T:Colourful.LabColor"/>.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.LChuvToLuvConverter">
+            <summary>
+            Converts from <see cref="T:Colourful.LChuvColor"/> to <see cref="T:Colourful.LuvColor"/>.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.LuvToLChuvConverter">
+            <summary>
+            Converts from <see cref="T:Colourful.LuvColor"/> to <see cref="T:Colourful.LChuvColor"/>.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.LMSTransformationMatrix">
+            <summary>
+            Matrix used for transformation from XYZ to LMS, defining the cone response domain.
+            Used in <see cref="T:Colourful.Conversion.IChromaticAdaptation"/>
+            </summary>
+            <remarks>
+            Matrix data obtained from:
+            Two New von Kries Based Chromatic Adaptation Transforms Found by Numerical Optimization
+            S. Bianco, R. Schettini 
+            DISCo, Department of Informatics, Systems and Communication, University of Milan-Bicocca, viale Sarca 336, 20126 Milan, Italy 
+            http://www.ivl.disco.unimib.it/papers2003/CRA-CAT.pdf
+            </remarks>
+        </member>
+        <member name="F:Colourful.Implementation.Conversion.LMSTransformationMatrix.VonKriesHPEAdjusted">
+            <summary>
+            Von Kries chromatic adaptation transform matrix (Hunt-Pointer-Estevez adjusted for D65)
+            </summary>
+        </member>
+        <member name="F:Colourful.Implementation.Conversion.LMSTransformationMatrix.VonKriesHPE">
+            <summary>
+            Von Kries chromatic adaptation transform matrix (Hunt-Pointer-Estevez for equal energy)
+            </summary>
+        </member>
+        <member name="F:Colourful.Implementation.Conversion.LMSTransformationMatrix.XYZScaling">
+            <summary>
+            XYZ scaling chromatic adaptation transform matrix
+            </summary>
+        </member>
+        <member name="F:Colourful.Implementation.Conversion.LMSTransformationMatrix.Bradford">
+            <summary>
+            Bradford chromatic adaptation transform matrix (used in CMCCAT97)
+            </summary>
+        </member>
+        <member name="F:Colourful.Implementation.Conversion.LMSTransformationMatrix.BradfordSharp">
+            <summary>
+            Spectral sharpening and the Bradford transform 
+            </summary>
+        </member>
+        <member name="F:Colourful.Implementation.Conversion.LMSTransformationMatrix.CMCCAT2000">
+            <summary>
+            CMCCAT2000 (fitted from all available color data sets)
+            </summary>
+        </member>
+        <member name="F:Colourful.Implementation.Conversion.LMSTransformationMatrix.CAT02">
+            <summary>
+            CAT02 (optimized for minimizing CIELAB differences)
+            </summary>
+        </member>
+        <member name="F:Colourful.Implementation.Conversion.XYZAndLMSConverter.DefaultTransformationMatrix">
+            <summary>
+            Default transformation matrix used, when no other is set. (Bradford)
+            <see cref="T:Colourful.Implementation.Conversion.LMSTransformationMatrix"/>
+            </summary>
+        </member>
+        <member name="P:Colourful.Implementation.Conversion.XYZAndLMSConverter.TransformationMatrix">
+            <summary>
+            Transformation matrix used for the conversion (definition of the cone response domain).
+            <see cref="T:Colourful.Implementation.Conversion.LMSTransformationMatrix"/>
+            </summary>
+        </member>
+        <member name="M:Colourful.Implementation.Conversion.XYZAndLMSConverter.#ctor(System.Collections.Generic.IReadOnlyList{System.Collections.Generic.IReadOnlyList{System.Double}})">
+            <param name="transformationMatrix">Definition of the cone response domain (see <see cref="T:Colourful.Implementation.Conversion.LMSTransformationMatrix"/>), if not set <see cref="F:Colourful.Implementation.Conversion.XYZAndLMSConverter.DefaultTransformationMatrix"/> will be used.</param>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.LuvToXYZConverter">
+            <summary>
+            Converts from <see cref="T:Colourful.LuvColor"/> to <see cref="T:Colourful.XYZColor"/>.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.XYZToLuvConverter">
+            <summary>
+            Converts from <see cref="T:Colourful.XYZColor"/> to <see cref="T:Colourful.LuvColor"/>.
+            </summary>
+        </member>
+        <member name="P:Colourful.Implementation.Conversion.XYZToLuvConverter.LuvWhitePoint">
+            <summary>
+            Target reference white. When not set, <see cref="F:Colourful.LuvColor.DefaultWhitePoint"/> is used.
+            </summary>
+        </member>
+        <member name="M:Colourful.Implementation.Conversion.LinearRGBToRGBConverter.CompandVector(System.Collections.Generic.IReadOnlyList{System.Double},Colourful.IRGBWorkingSpace)">
+            <summary>
+            Applying the working space companding function (<see cref="P:Colourful.IRGBWorkingSpace.Companding"/>) to uncompanded vector.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.LinearRGBToXYZConverter">
+            <summary>
+            Converts from <see cref="T:Colourful.LinearRGBColor"/> to <see cref="T:Colourful.XYZColor"/>.
+            </summary>
+        </member>
+        <member name="M:Colourful.Implementation.Conversion.LinearRGBToXYZConverter.#ctor(Colourful.IRGBWorkingSpace)">
+            <param name="sourceRGBWorkingSpace">Source RGB working space</param>
+        </member>
+        <member name="P:Colourful.Implementation.Conversion.LinearRGBToXYZConverter.SourceRGBWorkingSpace">
+            <summary>
+            Source RGB working space
+            </summary>
+        </member>
+        <member name="M:Colourful.Implementation.Conversion.RGBToLinearRGBConverter.UncompandVector(Colourful.RGBColor)">
+            <summary>
+            Applying the working space inverse companding function (<see cref="P:Colourful.IRGBWorkingSpace.Companding"/>) to RGB vector.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.Conversion.XYZToLinearRGBConverter">
+            <summary>
+            Converts from <see cref="T:Colourful.XYZColor"/> to <see cref="T:Colourful.LinearRGBColor"/>.
+            </summary>
+            <remarks>
+            The target RGB working space is <see cref="F:Colourful.RGBColor.DefaultWorkingSpace"/> when not set.
+            </remarks>
+        </member>
+        <member name="P:Colourful.Implementation.Conversion.XYZToLinearRGBConverter.TargetRGBWorkingSpace">
+            <summary>
+            Target RGB working space. When not set, target RGB working space is <see cref="F:Colourful.RGBColor.DefaultWorkingSpace"/>.
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.RGB.GammaCompanding">
+            <summary>
+            Gamma companding
+            </summary>
+            <remarks>
+            For more info see:
+            http://www.brucelindbloom.com/index.html?Eqn_RGB_to_XYZ.html
+            http://www.brucelindbloom.com/index.html?Eqn_XYZ_to_RGB.html
+            </remarks>
+        </member>
+        <member name="T:Colourful.Implementation.RGB.ICompanding">
+            <summary>
+            Pair of companding functions for <see cref="T:Colourful.IRGBWorkingSpace"/>.
+            Used for conversion to XYZ and backwards.
+            See also: <seealso cref="P:Colourful.IRGBWorkingSpace.Companding"/>
+            </summary>
+        </member>
+        <member name="M:Colourful.Implementation.RGB.ICompanding.InverseCompanding(System.Double)">
+            <summary>
+            Companded channel is made linear with respect to the energy.
+            </summary>
+            <remarks>
+            For more info see:
+            http://www.brucelindbloom.com/index.html?Eqn_RGB_to_XYZ.html
+            </remarks>
+        </member>
+        <member name="M:Colourful.Implementation.RGB.ICompanding.Companding(System.Double)">
+            <summary>
+            Uncompanded channel (linear) is made nonlinear (depends on the RGB color system).
+            </summary>
+            <remarks>
+            For more info see:
+            http://www.brucelindbloom.com/index.html?Eqn_XYZ_to_RGB.html
+            </remarks>
+        </member>
+        <member name="T:Colourful.Implementation.RGB.LCompanding">
+            <summary>
+            L* companding
+            </summary>
+            <remarks>
+            For more info see:
+            http://www.brucelindbloom.com/index.html?Eqn_RGB_to_XYZ.html
+            http://www.brucelindbloom.com/index.html?Eqn_XYZ_to_RGB.html
+            </remarks>
+        </member>
+        <member name="T:Colourful.Implementation.RGB.Rec2020Companding">
+            <summary>
+            Rec. 2020 companding function (for 12-bit).
+            </summary>
+            <remarks>
+            http://en.wikipedia.org/wiki/Rec._2020
+            
+            For 10-bits, companding is identical to <see cref="T:Colourful.Implementation.RGB.Rec709Companding"/>
+            </remarks>
+        </member>
+        <member name="T:Colourful.Implementation.RGB.Rec709Companding">
+            <summary>
+            Rec. 709 companding function
+            </summary>
+            <remarks>
+            http://en.wikipedia.org/wiki/Rec._709
+            </remarks>
+        </member>
+        <member name="T:Colourful.Implementation.RGB.RGBPrimariesChromaticityCoordinates">
+            <summary>
+            Chromaticity coordinates of RGB primaries.
+            One of the specifiers of <see cref="T:Colourful.IRGBWorkingSpace"/>.
+            </summary>
+        </member>
+        <member name="P:Colourful.Implementation.RGB.RGBPrimariesChromaticityCoordinates.R">
+            <summary>
+            Red
+            </summary>
+        </member>
+        <member name="P:Colourful.Implementation.RGB.RGBPrimariesChromaticityCoordinates.G">
+            <summary>
+            Green
+            </summary>
+        </member>
+        <member name="P:Colourful.Implementation.RGB.RGBPrimariesChromaticityCoordinates.B">
+            <summary>
+            Blue
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.RGB.RGBWorkingSpace">
+            <summary>
+            Trivial implementation of <see cref="T:Colourful.IRGBWorkingSpace"/>
+            </summary>
+        </member>
+        <member name="T:Colourful.Implementation.RGB.sRGBCompanding">
+            <summary>
+            sRGB companding
+            </summary>
+            <remarks>
+            For more info see:
+            http://www.brucelindbloom.com/index.html?Eqn_RGB_to_XYZ.html
+            http://www.brucelindbloom.com/index.html?Eqn_XYZ_to_RGB.html
+            </remarks>
+        </member>
+        <member name="T:Colourful.Implementation.Angle">
+            <summary>
+            Angle unit conversion helpers
+            </summary>
+        </member>
+        <member name="M:Colourful.Implementation.Extensions.Inverse(System.Collections.Generic.IReadOnlyList{System.Collections.Generic.IReadOnlyList{System.Double}})">
+            <summary>
+            Matrix inverse for 3 by 3 matrices
+            </summary>
+            <param name="matrix"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Colourful.CCTConverter">
+            <summary>
+            Can compute chromaticity from CCT (Correlated color temperature) and also
+            compute CCT of given chromaticity.
+            </summary>
+        </member>
+        <member name="M:Colourful.CCTConverter.GetChromaticityOfCCT(System.Double)">
+            <summary>
+            Returns chromaticity coordinates of given CCT (specified in K)
+            </summary>
+        </member>
+        <member name="M:Colourful.CCTConverter.GetCCTOfChromaticity(Colourful.xyChromaticityCoordinates)">
+            <summary>
+            Returns CCT (specified in K) of given chromaticity coordinates
+            </summary>
+            <remarks>Ranges usually from around 0 to 25000</remarks>
+        </member>
+        <member name="T:Colourful.SaturationLChFormulas">
+            <summary>
+            Extensions useful for <see cref="T:Colourful.LChabColor"/> and <see cref="T:Colourful.LChuvColor"/> color spaces.
+            </summary>
+        </member>
+        <member name="M:Colourful.SaturationLChFormulas.GetSaturation(System.Double,System.Double)">
+            <summary>
+            Returns saturation of the color (chroma normalized by lightness)
+            </summary>
+        </member>
+        <member name="M:Colourful.SaturationLChFormulas.GetChroma(System.Double,System.Double)">
+            <summary>
+            Gets chroma from saturation and lightness
+            </summary>
+        </member>
+    </members>
+</doc>
